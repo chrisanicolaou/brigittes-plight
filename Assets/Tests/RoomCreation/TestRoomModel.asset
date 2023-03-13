@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fc3efea77364143aab8d969a7a834dd, type: 3}
+  m_Name: TestRoomModel
+  m_EditorClassIdentifier: 
+  _name: Test Room
+  _enemyModels:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _totalEncounters: 5
+  _innCount: 1
+  _merchantCount: 1
+  _eventCount: 1
+  _eventLuck: 32.8
