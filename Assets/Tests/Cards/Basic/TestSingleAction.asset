@@ -16,15 +16,10 @@ MonoBehaviour:
   _description: 
   _artSprite: {fileID: 0}
   _chargeCost: 0
-  _actions:
-  - rid: 8744771413239660544
+  _controller:
+    rid: 8744771424580534281
   references:
     version: 2
     RefIds:
-    - rid: 8744771413239660544
-      type: {class: DealDamageAction, ns: ChiciStudios.BrigittesPlight.Actions, asm: Assembly-CSharp}
-      data:
-        name: DealDamageAction
-        _target: 0
-        _hasCondition: 0
-        _value: 5
+    - rid: 8744771424580534281
+      type: {class: TestCardController, ns: ChiciStudios.BrigittesPlight.Cards.Resources.TestCard, asm: Assembly-CSharp}

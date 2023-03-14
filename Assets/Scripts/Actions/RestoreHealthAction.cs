@@ -13,9 +13,11 @@ namespace ChiciStudios.BrigittesPlight.Actions
         public override GameEventType PrePhaseEvent => GameEventType.PreHealPhase;
         public override GameEventType PhaseEvent => GameEventType.HealPhase;
 
-        public override async UniTask<int> ExecuteInternal(BattleContext context, CardEntity castingCard, CastReserve castReserve)
+        public RestoreHealthAction(int value, TargetType target) : base(value, target) { }
+
+        protected override async UniTask<int> ExecuteInternal(BattleContext context, GameEventContext prePhaseContext)
         {
-            Debug.Log($"Restoring {Value} health to {Target}!");
+            Debug.Log($"Restoring {Value} health to {Target}! (Initial value was: {InitialValue}");
             return Value;
         }
     }

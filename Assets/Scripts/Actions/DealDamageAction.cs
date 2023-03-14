@@ -12,10 +12,12 @@ namespace ChiciStudios.BrigittesPlight.Actions
     {
         public override GameEventType PrePhaseEvent => GameEventType.PreDamagePhase;
         public override GameEventType PhaseEvent => GameEventType.DamagePhase;
+
+        public DealDamageAction(int value, TargetType target) : base(value, target) { }
         
-        public override async UniTask<int> ExecuteInternal(BattleContext context, CardEntity castingCard, CastReserve castReserve)
+        protected override async UniTask<int> ExecuteInternal(BattleContext context, GameEventContext prePhaseContext)
         {
-            Debug.Log($"Dealing {Value} damage to {Target}!");
+            Debug.Log($"Dealing {Value} damage to {Target}! (Initial value was: {InitialValue})");
             return Value;
         }
     }

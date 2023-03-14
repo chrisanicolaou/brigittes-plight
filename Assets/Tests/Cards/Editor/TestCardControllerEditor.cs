@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace ChiciStudios.BrigittesPlight.Tests.Cards.Editor
 {
-    [CustomEditor(typeof(TestCardController))]
+    [CustomEditor(typeof(TestCardCastController))]
     public class TestCardControllerEditor : UnityEditor.Editor
     {
-        private TestCardController _target;
+        private TestCardCastController _target;
 
         private void OnEnable()
         {
-            _target = target as TestCardController;
+            _target = target as TestCardCastController;
         }
 
         public override async void OnInspectorGUI()

@@ -1,4 +1,5 @@
 ﻿using ChiciStudios.BrigittesPlight.Actions;
+using ChiciStudios.BrigittesPlight.Cards.Controller;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -19,8 +20,8 @@ namespace ChiciStudios.BrigittesPlight.Cards.Model
 
         [SerializeField] private int _chargeCost;
 
-        [SerializeReference][ReferenceDropdown] private BattleAction[] _actions;
-
+        [SerializeReference, ReferenceDropdown] private CardController _controller;
+        
         #endregion
 
         #region Properties
@@ -32,10 +33,10 @@ namespace ChiciStudios.BrigittesPlight.Cards.Model
             get => _description;
             set => _description = value;
         }
-
-        public BattleAction[] Actions => _actions;
-
+        
         public Sprite ArtSprite => _artSprite;
+        
+        public CardController Controller => _controller;
 
         #endregion
     }
