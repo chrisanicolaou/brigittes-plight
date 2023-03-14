@@ -16,7 +16,7 @@ namespace ChiciStudios.BrigittesPlight.Triggers
             _target = targetType;
         }
 
-        public override async UniTask OnGameEventFired(BattleContext battleContext, GameEventContext eventContext)
+        public override async UniTask ExecuteTrigger(BattleContext battleContext, GameEventContext eventContext)
         {
             if (eventContext.Action.Target != _target) return;
 

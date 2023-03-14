@@ -1,5 +1,6 @@
 ﻿using System;
 using ChiciStudios.BrigittesPlight.Battle;
+using ChiciStudios.BrigittesPlight.Cards.Entity;
 using Cysharp.Threading.Tasks;
 
 namespace ChiciStudios.BrigittesPlight.Cards.Controller

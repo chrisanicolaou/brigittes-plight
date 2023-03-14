@@ -20,7 +20,20 @@ namespace ChiciStudios.BrigittesPlight.Triggers
             return _eventSubscribedTo == eventType;
         }
 
-        public abstract UniTask OnGameEventFired(BattleContext battleContext, GameEventContext eventContext);
+        public async UniTask OnGameEventFired(BattleContext battleContext, GameEventContext eventContext)
+        {
+            if (eventContext.IsSimulated && !ShouldExecuteOnSimulation()) return;
+
+            await ExecuteTrigger(battleContext, eventContext);
+        }
+
+        public abstract UniTask ExecuteTrigger(BattleContext battleContext, GameEventContext eventContext);
+        
+        // We only want to simulate PrePhase events. This is perhaps a naive implementation for this
+        public virtual bool ShouldExecuteOnSimulation()
+        {
+            return _eventSubscribedTo.ToString().StartsWith("Pre");
+        }
 
         public override string ToString()
         {

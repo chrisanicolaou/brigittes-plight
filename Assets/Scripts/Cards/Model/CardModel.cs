@@ -27,15 +27,9 @@ namespace ChiciStudios.BrigittesPlight.Cards.Model
         #region Properties
 
         public string Name => _name;
-
-        public string Description
-        {
-            get => _description;
-            set => _description = value;
-        }
-        
+        public string Description => _description;
+        public int ChargeCost => _chargeCost;
         public Sprite ArtSprite => _artSprite;
-        
         public CardController Controller => _controller;
 
         #endregion
