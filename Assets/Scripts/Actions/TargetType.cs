@@ -3,7 +3,7 @@
     public enum TargetType
     {
         Enemy,
-        Self,
+        Player,
         All
     }
 }

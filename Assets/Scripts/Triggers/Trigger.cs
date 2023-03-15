@@ -1,4 +1,5 @@
 ﻿using System;
+using ChiciStudios.BrigittesPlight.Actions;
 using ChiciStudios.BrigittesPlight.Battle;
 using ChiciStudios.BrigittesPlight.GameEvents;
 using Cysharp.Threading.Tasks;
@@ -8,11 +9,14 @@ namespace ChiciStudios.BrigittesPlight.Triggers
     [Serializable]
     public abstract class Trigger
     {
-        private GameEventType _eventSubscribedTo;
+        protected virtual TargetType Target { get; } = TargetType.Enemy;
 
-        protected Trigger(GameEventType eventToSubscribeTo)
+        private GameEventType _eventSubscribedTo;
+        
+        protected Trigger(GameEventType eventToSubscribeTo, TargetType target)
         {
             _eventSubscribedTo = eventToSubscribeTo;
+            Target = target;
         }
 
         public bool SubscribedTo(GameEventType eventType)
@@ -23,6 +27,7 @@ namespace ChiciStudios.BrigittesPlight.Triggers
         public async UniTask OnGameEventFired(BattleContext battleContext, GameEventContext eventContext)
         {
             if (eventContext.IsSimulated && !ShouldExecuteOnSimulation()) return;
+            if (eventContext.Action.Target != Target) return;
 
             await ExecuteTrigger(battleContext, eventContext);
         }

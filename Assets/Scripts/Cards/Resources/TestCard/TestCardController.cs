@@ -11,7 +11,7 @@ namespace ChiciStudios.BrigittesPlight.Cards.Resources.TestCard
         public override async UniTask OnCast(BattleContext battleContext)
         {
             Debug.Log("TestCard cast!");
-            var dealDamage = new DealDamageAction(5, TargetType.Self);
+            var dealDamage = new DealDamageAction(5, TargetType.Player);
             await dealDamage.Execute(battleContext);
         }
 

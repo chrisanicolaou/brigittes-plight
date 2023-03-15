@@ -8,19 +8,15 @@ namespace ChiciStudios.BrigittesPlight.Triggers
     public class RestoreHealthWhenHitTrigger : Trigger
     {
         private int _restoreAmount;
-        private TargetType _target;
 
-        public RestoreHealthWhenHitTrigger(int amount, TargetType targetType) : base(GameEventType.DamagePhase)
+        public RestoreHealthWhenHitTrigger(int amount, TargetType targetType) : base(GameEventType.DamagePhase, targetType)
         {
             _restoreAmount = amount;
-            _target = targetType;
         }
 
         public override async UniTask ExecuteTrigger(BattleContext battleContext, GameEventContext eventContext)
         {
-            if (eventContext.Action.Target != _target) return;
-
-            await new RestoreHealthAction(_restoreAmount, _target).Execute(battleContext);
+            await new RestoreHealthAction(_restoreAmount, Target).Execute(battleContext);
         }
     }
 }

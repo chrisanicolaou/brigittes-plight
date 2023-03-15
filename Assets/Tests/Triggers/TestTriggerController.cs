@@ -10,7 +10,7 @@ namespace ChiciStudios.BrigittesPlight.Tests.Triggers
     {
         [SerializeField] private MockBattleManager _mockBattleManager;
         
-        private Trigger _trigger = new RestoreHealthWhenHitTrigger(4, TargetType.Self);
+        private Trigger _trigger = new RestoreHealthWhenHitTrigger(4, TargetType.Player);
 
         public void AddTrigger()
         {
