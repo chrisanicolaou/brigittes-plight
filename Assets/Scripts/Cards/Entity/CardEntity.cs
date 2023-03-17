@@ -10,6 +10,19 @@ using UnityEngine;
 
 namespace ChiciStudios.BrigittesPlight.Cards.Entity
 {
+    /// <summary>
+    /// The mutable representation of a card during a run, and the singular way a card will be accessed by the rest of the application.
+    /// <para>
+    /// Whenever a card is created (e.g., when being drafted and/or added to deck), it is done by creating a CardEntity from a given
+    /// <see cref="CardModel"/>.
+    /// </para>
+    /// Responsible for calling methods on the <see cref="CardController"/> when cast and/or updating dynamic descriptions,
+    /// and for calling methods on the <see cref="UICard"/> for interacting with the associated GameObject (i.e. animated casts).
+    /// <para>See: <see cref="BattleManager"/>'s CastCard method for an example of how this is used.</para>
+    /// <seealso cref="CardModel"/>
+    /// <seealso cref="UICard"/>
+    /// <seealso cref="CardController"/>
+    /// </summary>
     public class CardEntity
     {
         private UICard _uiCard;

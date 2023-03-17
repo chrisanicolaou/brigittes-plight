@@ -14,7 +14,6 @@ namespace ChiciStudios.BrigittesPlight.Battle
     {
         private BattleContext _battleContext;
 
-        // THIS WILL BE REPLACED ONCE I KNOW HOW TO KEEP TRACK OF CARDS IN PLAY. FOR NOW, THEY ARE REGISTERED HERE IN TESTS
         public List<CardEntity> CardsInHand { get; set; } = new();
         public BattleContext BattleContext => _battleContext;
         

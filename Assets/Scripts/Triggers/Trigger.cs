@@ -6,6 +6,9 @@ using Cysharp.Threading.Tasks;
 
 namespace ChiciStudios.BrigittesPlight.Triggers
 {
+    /// <summary>
+    /// Base class representing any trigger that will respond to specific game events. (status effects/charms, basically any card that reads ("Whenever X...")
+    /// </summary>
     [Serializable]
     public abstract class Trigger
     {

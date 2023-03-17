@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace ChiciStudios.BrigittesPlight.Actions
 {
+    /// <summary>
+    /// Base class representing any action that will affect the state of the battle and/or run.
+    /// </summary>
     public abstract class BattleAction
     {
         public TargetType Target { get; set; }
