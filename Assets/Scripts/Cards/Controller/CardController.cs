@@ -35,33 +35,25 @@ namespace ChiciStudios.BrigittesPlight.Cards.Controller
 
         public virtual async UniTask<string> RenderDynamicDescription(string description, BattleContext battleContext, CardEntity castingCard)
         {
-            // Basically pulls out all occurrences of any letters inside "{ }" from the description (i.e. "{D}").
             var regex = new Regex(@"{[A-Z]+}", RegexOptions.Compiled);
             var matches = regex.Matches(description);
-            
-            // Creates a copy of the original description
             var dynamicDescription = description;
 
-            // For every match:
             foreach (Match match in matches)
             {
-                // Finds the dynamic value that corresponds to that specific key
                 var matchingDynamicValue = _dynamicValues.FirstOrDefault(d => d.Key == match.Value);
-                // If one doesn't exist, it means something like "{D}" exists in the description, but hasn't been programmed into that card's script
                 if (matchingDynamicValue is not { IsInitialized: true })
                 {
                     Debug.LogError($"Dynamic description key {match.Value} was not correctly initialized in {this.GetType().Name}");
                     continue;
                 }
 
-                // Simulates what would happen if that specific action was played - i.e, for keys of "{D}", plays a damage card with a pre-specified target.
                 matchingDynamicValue.ActionToSimulate.Value = matchingDynamicValue.Value;
                 await GameEventExecutor.Instance.FireGameEvent(new GameEventContext(
                     matchingDynamicValue.ActionToSimulate.PrePhaseEvent, 
                     castingCard, 
                     matchingDynamicValue.ActionToSimulate, true), 
                     battleContext);
-                // Once that card has been "played", it replaces the description key (match.Value) with the result of playing that action.
                 dynamicDescription = dynamicDescription.Replace(match.Value, matchingDynamicValue.ActionToSimulate.Value.ToString());
                 matchingDynamicValue.ActionToSimulate.Value = matchingDynamicValue.Value;
             }
