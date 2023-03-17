@@ -6,15 +6,16 @@ using ChiciStudios.BrigittesPlight.GameEvents;
 using ChiciStudios.BrigittesPlight.Triggers;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Object = System.Object;
 
 namespace ChiciStudios.BrigittesPlight.Battle
 {
     public class BattleManager
     {
         private BattleContext _battleContext;
-        private readonly List<Trigger> _triggers = new();
-        private int _triggerDepth;
 
+        // THIS WILL BE REPLACED ONCE I KNOW HOW TO KEEP TRACK OF CARDS IN PLAY. FOR NOW, THEY ARE REGISTERED HERE IN TESTS
+        public List<CardEntity> CardsInHand { get; set; } = new();
         public BattleContext BattleContext => _battleContext;
         
         public BattleManager()
@@ -26,9 +27,9 @@ namespace ChiciStudios.BrigittesPlight.Battle
         {
             try
             {
-                await FireGameEvent(new GameEventContext(GameEventType.PreCastPhase));
-                await card.Cast(_battleContext);
-                await FireGameEvent(new GameEventContext(GameEventType.CastPhase));
+                await GameEventExecutor.Instance.FireGameEvent(new GameEventContext(GameEventType.PreCastPhase, card), _battleContext);
+                await card.OnCast(_battleContext);
+                await GameEventExecutor.Instance.FireGameEvent(new GameEventContext(GameEventType.CastPhase, card), _battleContext);
             }
             catch (Exception e)
             {
@@ -37,31 +38,15 @@ namespace ChiciStudios.BrigittesPlight.Battle
             }
         }
 
-        public void AddTrigger(Trigger trigger)
+        // THIS IS WHERE YOU WERE :). Now is the time to figure out how 
+        public async UniTask EvaluateBattleState()
         {
-            Debug.Log($"Adding trigger: {trigger}");
-            _triggers.Add(trigger);
+            CardEntity[] cardsInHand = GetCardsInHand();
         }
 
-        private Trigger[] GetSubscribingTriggers(GameEventType eventType)
+        private CardEntity[] GetCardsInHand()
         {
-            Debug.Log($"Fetching triggers subscribed to: {eventType}");
-            return _triggers.Where(t => t.SubscribedTo(eventType)).ToArray();
-        }
-
-        public async UniTask<GameEventContext> FireGameEvent(GameEventContext eventContext)
-        {
-            _triggerDepth++;
-            if (_triggerDepth > 256) throw new Exception("Recursive event loop detected!");
-            Debug.Log($"Firing GameEvent: {eventContext.Type}");
-            var triggers = GetSubscribingTriggers(eventContext.Type);
-            foreach (var trigger in triggers)
-            {
-                Debug.Log($"Trigger found! Firing {trigger}");
-                await trigger.OnGameEventFired(_battleContext, eventContext);
-                Debug.Log($"Resolving back to: {eventContext}");
-            }
-            return eventContext;
+            return CardsInHand.ToArray();
         }
     }
 }

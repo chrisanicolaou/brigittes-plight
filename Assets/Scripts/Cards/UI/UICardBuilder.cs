@@ -1,5 +1,6 @@
 ﻿using System;
 using ChiciStudios.BrigittesPlight.Cards.Entity;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -34,7 +35,7 @@ namespace ChiciStudios.BrigittesPlight.Cards.UI
         }
 
         
-        public void Build()
+        public async UniTask Build()
         {
             if (_cardEntity == null)
             {
@@ -66,7 +67,7 @@ namespace ChiciStudios.BrigittesPlight.Cards.UI
                 return;
             }
             
-            _cardEntity.AttachUICard(uiCard);
+            await _cardEntity.AttachUICard(uiCard);
         }
     }
 }

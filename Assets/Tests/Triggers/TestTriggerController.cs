@@ -14,7 +14,7 @@ namespace ChiciStudios.BrigittesPlight.Tests.Triggers
 
         public void AddTrigger()
         {
-            _mockBattleManager.Manager.AddTrigger(_trigger);
+            _mockBattleManager.Manager.BattleContext.Triggers.Add(_trigger);
         }
     }
 }

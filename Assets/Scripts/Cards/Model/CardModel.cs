@@ -30,7 +30,7 @@ namespace ChiciStudios.BrigittesPlight.Cards.Model
         public string Description => _description;
         public int ChargeCost => _chargeCost;
         public Sprite ArtSprite => _artSprite;
-        public CardController Controller => _controller;
+        public CardController Controller => _controller.AsNew();
 
         #endregion
     }
